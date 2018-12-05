@@ -25,9 +25,9 @@ const processedData = inventory.forEach(product => {
     if (fave_snack === title) {
 
       // check if snack exists in data store
-      const index = realSnacks.findIndex(elem => elem.fave_snack === title)
+      const index = realSnacks.findIndex(elem => elem.fave_snack === title);
 
-        (index > -1)
+      (index > -1)
 
         ? realSnacks[index].email.push(email)
 
