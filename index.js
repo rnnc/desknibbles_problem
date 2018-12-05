@@ -11,26 +11,39 @@ const sample_data = JSON.parse(
   fs.readFileSync(path.resolve('./sample_data.json'))
 );
 
+// init data store
 const realSnacks = [];
 
 const processedData = inventory.forEach(product => {
-  sample_data.forEach(person => {
+
+  sample_data.forEach((person, i) => {
 
     const { fave_snack, email } = person;
     const { title, variants } = product;
 
-    if (person.fave_snack === product.title)
-      realSnacks.push({
-        fave_snack: person.fave_snack,
-        email: person.email,
-        price: variants[0].price
-      })
+    // check if snack exists in inventory
+    if (fave_snack === title) {
+
+      // check if snack exists in data store
+      const index = realSnacks.findIndex(elem => elem.fave_snack === title)
+
+        (index > -1)
+
+        ? realSnacks[index].email.push(email)
+
+        : realSnacks.push({
+          fave_snack,
+          email: [email],
+          price: variants[0].price
+        })
+    }
   })
+
 })
 
 fs.writeFileSync(
   path.resolve('./processed_data.json'),
-  JSON.stringify(realSnacks)
+  JSON.stringify(realSnacks, null, 2)
 );
 
 console.log(realSnacks)
