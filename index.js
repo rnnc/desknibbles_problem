@@ -33,8 +33,8 @@ const processedData = inventory.forEach(product => {
 
         : realSnacks.push({
           fave_snack,
-          email: [email],
-          price: variants[0].price
+          price: variants[0].price,
+          email: [email]
         })
     }
   })
